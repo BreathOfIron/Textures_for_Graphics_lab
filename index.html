@@ -88,28 +88,28 @@
             <span class="axis-label">Z-Axis (Front/Back)</span>
             <div class="control-row"><span class="slice-name">Front</span><button class="rot-btn" onclick="rotateSlice('F', 1)">←</button><button class="rot-btn" onclick="rotateSlice('F', -1)">→</button></div>
             <div class="control-row"><span class="slice-name">Stand</span><button class="rot-btn" onclick="rotateSlice('S', 1)">←</button><button class="rot-btn" onclick="rotateSlice('S', -1)">→</button></div>
-            <div class="control-row"><span class="slice-name">Back</span><button class="rot-btn" onclick="rotateSlice('B', -1)">←</button><button class="rot-btn" onclick="rotateSlice('B', 1)">→</button></div>
+            <div class="control-row"><span class="slice-name">Back</span><button class="rot-btn" onclick="rotateSlice('B', 1)">←</button><button class="rot-btn" onclick="rotateSlice('B', -1)">→</button></div>
         </div>
 
         <div class="axis-group">
             <span class="axis-label">Y-Axis (Up/Down)</span>
             <div class="control-row"><span class="slice-name">Up (Top)</span><button class="rot-btn" onclick="rotateSlice('U', -1)">←</button><button class="rot-btn" onclick="rotateSlice('U', 1)">→</button></div>
             <div class="control-row"><span class="slice-name">Equator</span><button class="rot-btn" onclick="rotateSlice('E', -1)">←</button><button class="rot-btn" onclick="rotateSlice('E', 1)">→</button></div>
-            <div class="control-row"><span class="slice-name">Down</span><button class="rot-btn" onclick="rotateSlice('D', 1)">←</button><button class="rot-btn" onclick="rotateSlice('D', -1)">→</button></div>
+            <div class="control-row"><span class="slice-name">Down</span><button class="rot-btn" onclick="rotateSlice('D', -1)">←</button><button class="rot-btn" onclick="rotateSlice('D', 1)">→</button></div>
         </div>
 
         <div class="axis-group">
             <span class="axis-label">X-Axis (Left/Right)</span>
             <div class="control-row"><span class="slice-name">Left</span><button class="rot-btn" onclick="rotateSlice('L', 1)">↓</button><button class="rot-btn" onclick="rotateSlice('L', -1)">↑</button></div>
             <div class="control-row"><span class="slice-name">Middle</span><button class="rot-btn" onclick="rotateSlice('M', 1)">↓</button><button class="rot-btn" onclick="rotateSlice('M', -1)">↑</button></div>
-            <div class="control-row"><span class="slice-name">Right</span><button class="rot-btn" onclick="rotateSlice('R', -1)">↓</button><button class="rot-btn" onclick="rotateSlice('R', 1)">↑</button></div>
+            <div class="control-row"><span class="slice-name">Right</span><button class="rot-btn" onclick="rotateSlice('R', 1)">↓</button><button class="rot-btn" onclick="rotateSlice('R', -1)">↑</button></div>
         </div>
     </div>
 
     <a-scene>
       <a-assets>
         <a-asset-item id="cube-model" src="https://kostasgian21.github.io/computer_graphics/rubiks_cube_standard_solid_v3.glb"></a-asset-item>
-        <img id="skyTexture" src="https://kostasgian21.github.io/computer_graphics/360-degree_Panorama_of_the_Southern_Sky.jpg" crossorigin="anonymous"/>
+        <img id="skyTexture" src="https://breathofiron.github.io/Textures_for_Graphics_lab/chapel.jpg" crossorigin="anonymous"/>
       </a-assets>
       <a-sky src="#skyTexture"></a-sky>
       
@@ -254,4 +254,3 @@
     </script>
   </body>
 </html>
-
