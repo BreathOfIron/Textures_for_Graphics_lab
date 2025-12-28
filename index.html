@@ -2,7 +2,7 @@
   <head>
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
     <style>
-      /* --- MAIN MENU (Top Left) --- */
+      /*MAIN_MENU_LEFT*/
       .menu-container {
         position: absolute; 
         top: 20px; left: 20px; z-index: 10;
@@ -14,7 +14,7 @@
         color: white; 
       }
       
-      /* --- GOBLIN MENU (Bottom Right) --- */
+      /*GOBLIN_MENU_RIGHT*/
       .goblin-menu {
         position: absolute;
         bottom: 20px; right: 20px; z-index: 10;
@@ -24,8 +24,7 @@
         box-shadow: 0 4px 6px rgba(0,0,0,0.3);
       }
 
-      /* --- STATS POSITIONING (Force to Top Right) --- */
-      /* A-Frame automatically adds a class called 'rs-base' to the stats box */
+      /*STATS_RIGHT*/
       .rs-base {
         top: 20px !important;
         left: auto !important;
@@ -33,14 +32,14 @@
         z-index: 10000 !important;
       }
 
-      /* Shared Styles */
+
       .axis-group { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.3); }
       .axis-group:last-child { border-bottom: none; margin-bottom: 0;}
       .axis-label { font-weight: bold; font-size: 14px; margin-bottom: 8px; display: block; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
       .control-row { display: flex; align-items: center; margin-bottom: 6px; justify-content: space-between; }
       .slice-name { font-size: 13px; font-weight: bold; width: 80px; color: #f0f0f0; }
 
-      /* Buttons */
+      /* BUTTONS */
       button.rot-btn { cursor: pointer; padding: 4px 12px; border: 1px solid rgba(0,0,0,0.2); border-radius: 4px; background: #339933; color: white; font-size: 16px; width: 45px; transition: background 0.2s; }
       button.rot-btn:hover { background: #006600; }
 
@@ -137,7 +136,7 @@
     </a-scene>
 
     <script>
-      /* --- GOBLIN LOGIC --- */
+      /*GOBLIN_ROTATION*/
       function spinGoblin() {
         const goblin = document.getElementById('goblin');
         const currentRot = goblin.getAttribute('rotation');
@@ -151,7 +150,7 @@
         });
       }
 
-      /* --- CAMERA LOGIC --- */
+      /*CAMERA_ROTATION*/
       const rig = document.getElementById('cam-rig');
       function setView(viewName) {
         let targetRot = "0 0 0";
@@ -171,7 +170,7 @@
         });
       }
 
-      /* --- CUBE LOGIC --- */
+      /*CUBE_ROTATION*/
       const cluster = document.getElementById('cube-cluster');
       const pivot = document.getElementById('pivot');
       let isAnimating = false;
@@ -272,4 +271,5 @@
     </script>
   </body>
 </html>
+
 
