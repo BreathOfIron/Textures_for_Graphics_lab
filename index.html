@@ -2,7 +2,7 @@
   <head>
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
     <style>
-      /* --- UI STYLING --- */
+      /* --- MAIN MENU (Top Left) --- */
       .menu-container {
         position: absolute; 
         top: 20px; left: 20px; z-index: 10;
@@ -14,64 +14,49 @@
         color: white; 
       }
       
-      .axis-group {
-        margin-bottom: 15px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid rgba(255,255,255,0.3);
+      /* --- GOBLIN MENU (Bottom Right) --- */
+      .goblin-menu {
+        position: absolute;
+        bottom: 20px; right: 20px; z-index: 10;
+        background: rgba(0, 204, 102, 0.95);
+        padding: 10px; border-radius: 8px;
+        font-family: sans-serif;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
       }
+
+      /* --- STATS POSITIONING (Force to Top Right) --- */
+      /* A-Frame automatically adds a class called 'rs-base' to the stats box */
+      .rs-base {
+        top: 20px !important;
+        left: auto !important;
+        right: 20px !important;
+        z-index: 10000 !important;
+      }
+
+      /* Shared Styles */
+      .axis-group { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.3); }
       .axis-group:last-child { border-bottom: none; margin-bottom: 0;}
+      .axis-label { font-weight: bold; font-size: 14px; margin-bottom: 8px; display: block; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+      .control-row { display: flex; align-items: center; margin-bottom: 6px; justify-content: space-between; }
+      .slice-name { font-size: 13px; font-weight: bold; width: 80px; color: #f0f0f0; }
 
-      .axis-label {
-        font-weight: bold; font-size: 14px; 
-        margin-bottom: 8px; display: block;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-      }
-
-      .control-row {
-        display: flex; align-items: center;
-        margin-bottom: 6px; justify-content: space-between;
-      }
-      
-      .slice-name {
-        font-size: 13px; font-weight: bold; width: 80px; color: #f0f0f0;
-      }
-
-      /* Slice Rotation Buttons */
-      button.rot-btn { 
-        cursor: pointer; padding: 4px 12px; 
-        border: 1px solid rgba(0,0,0,0.2); border-radius: 4px; 
-        background: #339933; color: white;
-        font-size: 16px; width: 45px;
-        transition: background 0.2s;
-      }
+      /* Buttons */
+      button.rot-btn { cursor: pointer; padding: 4px 12px; border: 1px solid rgba(0,0,0,0.2); border-radius: 4px; background: #339933; color: white; font-size: 16px; width: 45px; transition: background 0.2s; }
       button.rot-btn:hover { background: #006600; }
 
-      /* Camera Buttons Grid */
-      .cam-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 5px;
-        margin-bottom: 10px;
-      }
-
-      button.cam-btn {
-        background: #004d00; 
-        border: 1px solid #fff;
-        padding: 6px 2px;
-        font-size: 12px;
-        color: white;
-        cursor: pointer;
-        border-radius: 4px;
-      }
+      button.cam-btn { background: #004d00; border: 1px solid #fff; padding: 6px 2px; font-size: 12px; color: white; cursor: pointer; border-radius: 4px; }
       button.cam-btn:hover { background: #003300; }
+      
+      button.goblin-btn { background: #003300; border: 2px solid #fff; padding: 10px 20px; font-size: 14px; font-weight: bold; color: white; cursor: pointer; border-radius: 6px; }
+      button.goblin-btn:hover { background: #006600; transform: scale(1.05); }
 
+      .cam-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; margin-bottom: 10px; }
       body.animating button { opacity: 0.5; pointer-events: none; }
     </style>
   </head>
   <body>
     
     <div class="menu-container">
-        
         <div class="axis-group">
             <span class="axis-label">Camera Views</span>
             <div class="cam-grid">
@@ -106,7 +91,12 @@
         </div>
     </div>
 
-    <a-scene>
+    <div class="goblin-menu">
+        <button class="goblin-btn" onclick="spinGoblin()">Spin Goblin (Z)</button>
+    </div>
+
+    <a-scene stats>
+      
       <a-assets>
         <a-asset-item id="my-model" src="https://breathofiron.github.io/Textures_for_Graphics_lab/goblin_head_1.glb"></a-asset-item>
         <a-asset-item id="my-name" src="https://breathofiron.github.io/Textures_for_Graphics_lab/Name.glb"></a-asset-item>
@@ -114,18 +104,22 @@
         <img id="skyTexture" src="https://breathofiron.github.io/Textures_for_Graphics_lab/chapel.jpg" crossorigin="anonymous"/>
       </a-assets>
       <a-sky src="#skyTexture"></a-sky>
-       <a-entity 
+
+      <a-entity 
+        id="goblin"
         gltf-model="#my-model" 
         position="-2 -1 1.5" 
         scale="15 15 15"
         rotation="-10 30 0">
       </a-entity>
-             <a-entity 
+      
+      <a-entity 
         gltf-model="#my-name" 
         position="0 -1 1.5" 
         scale="20 20 20"
         rotation="0 0 0">
       </a-entity>
+
       <a-entity light="type: ambient; intensity: 0.4; color: #ffffff"></a-entity>
       <a-entity light="type: directional; intensity: 0.5" position="0 2 5"></a-entity>
       <a-entity light="type: directional; intensity: 0.5" position="0 2 -10"></a-entity>
@@ -143,12 +137,24 @@
     </a-scene>
 
     <script>
+      /* --- GOBLIN LOGIC --- */
+      function spinGoblin() {
+        const goblin = document.getElementById('goblin');
+        const currentRot = goblin.getAttribute('rotation');
+        const targetZ = currentRot.z + 360;
+
+        goblin.setAttribute('animation', {
+            property: 'rotation',
+            to: `${currentRot.x} ${currentRot.y} ${targetZ}`,
+            dur: 1000,
+            easing: 'easeInOutQuad'
+        });
+      }
+
       /* --- CAMERA LOGIC --- */
       const rig = document.getElementById('cam-rig');
-      
       function setView(viewName) {
         let targetRot = "0 0 0";
-
         switch(viewName) {
             case 'front':  targetRot = "0 0 0"; break;
             case 'back':   targetRot = "0 180 0"; break;
@@ -157,7 +163,6 @@
             case 'top':    targetRot = "-90 0 0"; break;
             case 'bottom': targetRot = "90 0 0"; break;
         }
-
         rig.setAttribute('animation', {
             property: 'rotation',
             to: targetRot,
@@ -267,3 +272,4 @@
     </script>
   </body>
 </html>
+
