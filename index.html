@@ -138,15 +138,43 @@
     <script>
       /*GOBLIN_ROTATION*/
       function spinGoblin() {
+        if (isAnimating) return;
+        isAnimating = true;
+        document.body.classList.add('animating');
+
         const goblin = document.getElementById('goblin');
-        const currentRot = goblin.getAttribute('rotation');
+        
+
+        const currentRot = {
+            x: THREE.MathUtils.radToDeg(goblin.object3D.rotation.x),
+            y: THREE.MathUtils.radToDeg(goblin.object3D.rotation.y),
+            z: THREE.MathUtils.radToDeg(goblin.object3D.rotation.z)
+        };
+
         const targetZ = currentRot.z + 360;
 
+        
         goblin.setAttribute('animation', {
             property: 'rotation',
+            from: `${currentRot.x} ${currentRot.y} ${currentRot.z}`,
             to: `${currentRot.x} ${currentRot.y} ${targetZ}`,
             dur: 1000,
             easing: 'easeInOutQuad'
+        });
+
+        // 3. Listen for the EXACT moment the animation finishes
+        goblin.addEventListener('animationcomplete', function cleanup() {
+            goblin.removeEventListener('animationcomplete', cleanup);
+
+            
+            goblin.setAttribute('rotation', `${currentRot.x} ${currentRot.y} ${targetZ}`);
+            
+            
+            goblin.removeAttribute('animation');
+
+            
+            isAnimating = false;
+            document.body.classList.remove('animating');
         });
       }
 
@@ -271,8 +299,3 @@
     </script>
   </body>
 </html>
-
-
-
-
-
